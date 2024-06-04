@@ -1,5 +1,7 @@
 using FluentValidation;
+using HelpDeskSharedMessages;
 using IssueTracker.Api.Catalog;
+using IssueTracker.Api.Issues.ReadModels;
 using IssueTracker.Api.Shared;
 using Marten;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
@@ -10,6 +12,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Wolverine;
+using Wolverine.Kafka;
 using Wolverine.Marten;
 
 
@@ -87,11 +90,17 @@ builder.Services.AddMarten(options =>
     options.UseSystemTextJsonForSerialization();
     options.Connection(connectionString);
     options.DatabaseSchemaName = "issues";
+    options.Projections.Add<UserIssueProjection>(Marten.Events.Projections.ProjectionLifecycle.Inline);
 }).UseLightweightSessions().IntegrateWithWolverine().AddAsyncDaemon(Marten.Events.Daemon.Resiliency.DaemonMode.Solo);
 
+var kafkaConnectionString = builder.Configuration.GetValue<string>("kafka") ?? throw new Exception("Need a kafka broker");
 builder.Host.UseWolverine(opts =>
 {
+    opts.UseKafka(kafkaConnectionString); // more here later
+
     opts.Policies.AutoApplyTransactions();
+
+    opts.PublishMessage<HelpDeskIssueCreated>().ToKafkaTopic("help-desk.issue-created");
 });
 
 
