@@ -1,9 +1,11 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
 @apiUrl=https://localhost:1338
 
-@ordinaryUserToken=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJvYkBhb2wuY29tIiwic3ViIjoiYm9iQGFvbC5jb20iLCJqdGkiOiJjOGJiNmRmNyIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjQzNDY3IiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjgiLCJodHRwOi8vbG9jYWxob3N0OjEzMzciLCJodHRwczovL2xvY2FsaG9zdDoxMzM4Il0sIm5iZiI6MTcxNzUxNTkyNywiZXhwIjoxNzI1NDY0NzI3LCJpYXQiOjE3MTc1MTU5MjgsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.Ea37Hs7jcmSEwuLFc5d8ykasZI3sl-LXrK3XUT4ohZw
+@ordinaryUserToken=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJvYkBhb2wuY29tIiwic3ViIjoiYm9iQGFvbC5jb20iLCJqdGkiOiI4NGFkYzNmNiIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjQzNDY3IiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjgiLCJodHRwOi8vbG9jYWxob3N0OjEzMzciLCJodHRwczovL2xvY2FsaG9zdDoxMzM4Il0sIm5iZiI6MTcxNzUxNjA2OSwiZXhwIjoxNzI1NDY0ODY5LCJpYXQiOjE3MTc1MTYwNzAsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.NE5vxhsWsSeMzjt1SiG2Q2tE03_kjzN_UnYVYPTIpB8
 
-@softwareCenterUserToken=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN1ZUBhb2wuY29tIiwic3ViIjoic3VlQGFvbC5jb20iLCJqdGkiOiJmYjE4YzBhZiIsInJvbGUiOiJTb2Z0d2FyZUNlbnRlciIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjQzNDY3IiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjgiLCJodHRwOi8vbG9jYWxob3N0OjEzMzciLCJodHRwczovL2xvY2FsaG9zdDoxMzM4Il0sIm5iZiI6MTcxNzUxNTg3NSwiZXhwIjoxNzI1NDY0Njc1LCJpYXQiOjE3MTc1MTU4NzcsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.hDLX0TCi0PBicK7-GbvS23UVY5ACUcA0X5Ug7o_qdiY
+
+@softwareCenterUserToken=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InN1ZUBhb2wuY29tIiwic3ViIjoic3VlQGFvbC5jb20iLCJqdGkiOiI3MzdlN2ZhNCIsInJvbGUiOiJTb2Z0d2FyZUNlbnRlciIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjQzNDY3IiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjgiLCJodHRwOi8vbG9jYWxob3N0OjEzMzciLCJodHRwczovL2xvY2FsaG9zdDoxMzM4Il0sIm5iZiI6MTcxNzUxNjAyNSwiZXhwIjoxNzI1NDY0ODI1LCJpYXQiOjE3MTc1MTYwMjYsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.mZyQtnSQB1sMAl3--m3bpT6r5BRxUvMHe-NFvuZq9C8
+
 # Members of the Software Center can add new items to our catalog of supported software.
 # We have a "COLLECTION" of supported software, and we want to APPEND a new subordinate resource (DOCUMENT) to that collection.
 
@@ -12,8 +14,8 @@ Authorization: {{softwareCenterUserToken}}
 Content-Type: application/json
 
 {
-  "title": "VS Code",
-  "description": "A developer editor"
+  "title": "Notepad",
+  "description": "A plain text editor"
 }
 
 ###
@@ -28,26 +30,13 @@ Authorization: {{ordinaryUserToken}}
 
 ### Add An Inn Issue
 
-POST {{apiUrl}}/catalog/245caa4b-0681-4a7c-9660-668712c34d9e/issues
+POST {{apiUrl}}/catalog/c26f955c-2c2c-46b9-a4a1-32c09e3b654a/issues
 Authorization: {{ordinaryUserToken}}
 Content-Type: application/json
 
 {
-  "description": "Want Clippy! Not Copilot!",
-  "impact": "Inconvenience"
+  "description": "Want Clippy! Not Copilot!"
 }
-
-
-
-### Get an update on the issue I sent above
-
-# GET {{apiUrl}}/catalog/245caa4b-0681-4a7c-9660-668712c34d9e/issues/the-id-of-issue
-# GET {{apiUrl}}/issues/{{id}}
-# GET {{apiUrl}}/users/{userId}/issues/{issueId}
-
-GET {{apiUrl}}/issues/36dc0e57-7e82-4609-bb69-01442bda0ec4
-Accept: application/json
-
 
 ### Get Support Info
 
